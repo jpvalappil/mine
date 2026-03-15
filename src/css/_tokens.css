@@ -1,0 +1,54 @@
+@layer tokens {
+  :root {
+    --mine-color-bg:           #ffffff;
+    --mine-color-bg-subtle:    #f5f5f5;
+    --mine-color-text:         #1a1a1a;
+    --mine-color-text-muted:   #6b7280;
+    --mine-color-accent:       #0066cc;
+    --mine-color-accent-hover: #0052a3;
+    --mine-color-danger:       #dc2626;
+    --mine-color-success:      #16a34a;
+    --mine-color-warning:      #d97706;
+    --mine-color-border:       #e5e7eb;
+    --mine-space-1: 4px; --mine-space-2: 8px; --mine-space-3: 12px;
+    --mine-space-4: 16px; --mine-space-6: 24px; --mine-space-8: 32px;
+    --mine-font-sans: system-ui, -apple-system, sans-serif;
+    --mine-font-mono: ui-monospace, 'Cascadia Code', monospace;
+    --mine-text-sm: 0.875rem; --mine-text-base: 1rem;
+    --mine-text-lg: 1.125rem; --mine-text-xl: 1.25rem;
+    --mine-radius-sm: 3px; --mine-radius-base: 6px;
+    --mine-radius-lg: 10px; --mine-radius-full: 9999px;
+    --mine-duration-fast: 100ms; --mine-duration-base: 200ms;
+    --mine-easing-base: ease;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --mine-color-bg: #0f0f0f; --mine-color-bg-subtle: #1a1a1a;
+      --mine-color-text: #e8e8e8; --mine-color-text-muted: #9ca3af;
+      --mine-color-accent: #60a5fa; --mine-color-accent-hover: #93c5fd;
+      --mine-color-danger: #f87171; --mine-color-success: #4ade80;
+      --mine-color-warning: #fbbf24; --mine-color-border: #2d2d2d;
+    }
+  }
+  [data-theme="dark"] {
+    --mine-color-bg: #0f0f0f; --mine-color-bg-subtle: #1a1a1a;
+    --mine-color-text: #e8e8e8; --mine-color-text-muted: #9ca3af;
+    --mine-color-accent: #60a5fa; --mine-color-accent-hover: #93c5fd;
+    --mine-color-danger: #f87171; --mine-color-success: #4ade80;
+    --mine-color-warning: #fbbf24; --mine-color-border: #2d2d2d;
+  }
+  [data-theme="light"] {
+    --mine-color-bg: #ffffff; --mine-color-bg-subtle: #f5f5f5;
+    --mine-color-text: #1a1a1a; --mine-color-text-muted: #6b7280;
+    --mine-color-accent: #0066cc; --mine-color-accent-hover: #0052a3;
+    --mine-color-danger: #dc2626; --mine-color-success: #16a34a;
+    --mine-color-warning: #d97706; --mine-color-border: #e5e7eb;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@layer components {
+  label { display: block; font-size: var(--mine-text-sm); font-weight: 600; color: var(--mine-color-text); margin-block-end: var(--mine-space-1); }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select {
+    display: block; width: 100%; padding: var(--mine-space-2) var(--mine-space-3);
+    font-size: var(--mine-text-base); font-family: inherit; color: var(--mine-color-text);
+    background: var(--mine-color-bg); border: 1px solid var(--mine-color-border);
+    border-radius: var(--mine-radius-base); appearance: none;
+    transition: border-color var(--mine-duration-fast) var(--mine-easing-base), box-shadow var(--mine-duration-fast) var(--mine-easing-base);
+  }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):focus, textarea:focus, select:focus {
+    outline: none; border-color: var(--mine-color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mine-color-accent) 20%, transparent);
+  }
+  input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--mine-color-danger); }
+  input[aria-invalid="true"]:focus, select[aria-invalid="true"]:focus, textarea[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mine-color-danger) 20%, transparent); }
+  input:disabled, textarea:disabled, select:disabled { opacity: 0.5; cursor: not-allowed; background: var(--mine-color-bg-subtle); }
+  textarea { min-height: 6rem; resize: vertical; }
+  select {
+    padding-inline-end: var(--mine-space-8);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%236b7280' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right var(--mine-space-3) center; cursor: pointer;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%239ca3af' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E"); }
+  }
+  [data-theme="dark"] select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%239ca3af' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E"); }
+  input[type="checkbox"], input[type="radio"] { width: 1rem; height: 1rem; accent-color: var(--mine-color-accent); cursor: pointer; flex-shrink: 0; }
+  input[type="checkbox"][role="switch"] { width: 2.25rem; height: 1.25rem; }
+  fieldset { border: 1px solid var(--mine-color-border); border-radius: var(--mine-radius-base); padding: var(--mine-space-4); }
+  legend { font-size: var(--mine-text-sm); font-weight: 600; padding-inline: var(--mine-space-2); }
+}

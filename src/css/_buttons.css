@@ -1,0 +1,26 @@
+@layer components {
+  button, [type="button"], [type="submit"], [type="reset"] {
+    display: inline-flex; align-items: center; gap: var(--mine-space-2);
+    padding: var(--mine-space-2) var(--mine-space-4);
+    font-family: inherit; font-size: var(--mine-text-base); font-weight: 500; line-height: 1.5;
+    border-radius: var(--mine-radius-base); border: 1px solid var(--mine-color-border);
+    cursor: pointer; background: var(--mine-color-bg-subtle); color: var(--mine-color-text);
+    text-decoration: none;
+    transition: background var(--mine-duration-fast) var(--mine-easing-base), border-color var(--mine-duration-fast) var(--mine-easing-base), opacity var(--mine-duration-fast) var(--mine-easing-base);
+  }
+  button:hover, [type="button"]:hover, [type="submit"]:hover, [type="reset"]:hover { background: var(--mine-color-border); }
+  button.primary, [type="submit"]:not(.ghost):not(.danger) { background: var(--mine-color-accent); color: #fff; border-color: var(--mine-color-accent); }
+  button.primary:hover, [type="submit"]:not(.ghost):not(.danger):hover { background: var(--mine-color-accent-hover); border-color: var(--mine-color-accent-hover); }
+  button.danger { background: var(--mine-color-danger); color: #fff; border-color: var(--mine-color-danger); }
+  button.danger:hover { opacity: 0.88; }
+  button.ghost { background: transparent; border-color: transparent; color: var(--mine-color-accent); }
+  button.ghost:hover { background: var(--mine-color-bg-subtle); border-color: transparent; }
+  button.sm { font-size: var(--mine-text-sm); padding: var(--mine-space-1) var(--mine-space-3); }
+  button.lg { font-size: var(--mine-text-lg); padding: var(--mine-space-3) var(--mine-space-6); }
+  button:disabled, [type="button"]:disabled, [type="submit"]:disabled, [type="reset"]:disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+  [role="group"] { display: inline-flex; }
+  [role="group"] > button, [role="group"] > [type="button"] { border-radius: 0; }
+  [role="group"] > button:first-child, [role="group"] > [type="button"]:first-child { border-start-start-radius: var(--mine-radius-base); border-end-start-radius: var(--mine-radius-base); }
+  [role="group"] > button:last-child, [role="group"] > [type="button"]:last-child { border-start-end-radius: var(--mine-radius-base); border-end-end-radius: var(--mine-radius-base); }
+  [role="group"] > button + button, [role="group"] > [type="button"] + [type="button"] { margin-inline-start: -1px; }
+}

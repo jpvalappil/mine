@@ -1,0 +1,42 @@
+{
+  "name": "mine",
+  "version": "0.1.0",
+  "description": "Semantic-first, zero-dependency UI library",
+  "type": "module",
+  "main": "dist/mine.js",
+  "module": "dist/mine.esm.js",
+  "types": "dist/mine.d.ts",
+  "style": "dist/mine.css",
+  "exports": {
+    ".": {
+      "import": "./dist/mine.esm.js",
+      "require": "./dist/mine.js"
+    },
+    "./dist/mine.css": "./dist/mine.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.0.0",
+    "cssnano": "^6.1.2",
+    "esbuild": "^0.20.0",
+    "jsdom": "^24.0.0",
+    "postcss": "^8.4.0",
+    "postcss-import": "^16.0.0",
+    "vitest": "^1.0.0"
+  },
+  "keywords": ["css", "ui", "library", "semantic", "zero-dependency"],
+  "license": "MIT",
+  "homepage": "https://github.com/jpvalappil/mine#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpvalappil/mine"
+  }
+}
