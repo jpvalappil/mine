@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'">
+  <title>mine — Semantic-first UI library</title>
+  <link rel="stylesheet" href="../dist/mine.css">
+  <style>
+    .doc-layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    @media (max-width: 768px) { .doc-layout { grid-template-columns: 1fr; } .doc-nav { display: none; } }
+    .doc-nav { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 1.5rem 1rem; border-right: 1px solid var(--mine-color-border); background: var(--mine-color-bg-subtle); }
+    .doc-nav ul { list-style: none; padding: 0; margin: 0; }
+    .doc-nav li + li { margin-top: 0.2rem; }
+    .doc-nav a { display: block; padding: 0.3rem 0.75rem; border-radius: var(--mine-radius-base); color: var(--mine-color-text-muted); text-decoration: none; font-size: var(--mine-text-sm); font-weight: 500; }
+    .doc-nav a:hover { background: var(--mine-color-border); color: var(--mine-color-text); }
+    .doc-nav .nav-section { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mine-color-text-muted); padding: 1rem 0.75rem 0.25rem; }
+    .doc-main { padding: 2.5rem 3rem; max-width: 860px; }
+    @media (max-width: 900px) { .doc-main { padding: 1.5rem; } }
+    .doc-section { margin-block-end: 3.5rem; }
+    .doc-section > h2 { font-size: 1.5rem; border-bottom: 1px solid var(--mine-color-border); padding-bottom: var(--mine-space-2); margin-bottom: var(--mine-space-6); }
+    .doc-section > h3 { font-size: 1rem; margin-top: var(--mine-space-6); margin-bottom: var(--mine-space-2); }
+    .demo { padding: var(--mine-space-6); border: 1px solid var(--mine-color-border); border-radius: var(--mine-radius-base); margin-block-end: var(--mine-space-3); }
+    .demo + pre { margin-block-end: var(--mine-space-6); }
+    .demo-box { padding: var(--mine-space-3) var(--mine-space-4); border-radius: var(--mine-radius-base); border: 1px solid var(--mine-color-border); background: var(--mine-color-bg-subtle); color: var(--mine-color-text-muted); font-size: var(--mine-text-sm); text-align: center; }
+    .swatch { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 3px; border: 1px solid var(--mine-color-border); vertical-align: middle; margin-right: 0.35rem; }
+    .token-table { font-size: var(--mine-text-sm); }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: var(--mine-space-2); margin-top: var(--mine-space-4); }
+  </style>
+</head>
+<body>
+<div class="doc-layout">
+  <nav class="doc-nav" aria-label="Documentation navigation">
+    <div style="margin-bottom:1.25rem">
+      <strong style="font-size:1.1rem">mine</strong>
+      <span style="font-size:var(--mine-text-sm);color:var(--mine-color-text-muted)"> v0.1.0</span>
+    </div>
+    <ul>
+      <li class="nav-section" aria-hidden="true">Getting started</li>
+      <li><a href="#install">Install</a></li>
+      <li><a href="#dark-mode">Dark mode</a></li>
+      <li class="nav-section" aria-hidden="true">Base</li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#lists">Lists</a></li>
+      <li class="nav-section" aria-hidden="true">Components</li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#layout">Layout</a></li>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#badges">Badges</a></li>
+      <li><a href="#alerts">Alerts</a></li>
+      <li><a href="#tables">Tables</a></li>
+      <li><a href="#accordion">Accordion</a></li>
+      <li><a href="#toast">Toast</a></li>
+      <li class="nav-section" aria-hidden="true">Reference</li>
+      <li><a href="#tokens">Design tokens</a></li>
+    </ul>
+    <div style="margin-top:1.5rem">
+      <button id="btn-toggle-theme-nav" style="width:100%;justify-content:center">Toggle dark mode</button>
+    </div>
+  </nav>
+
+  <main class="doc-main">
+    <h1 style="margin-bottom:var(--mine-space-2)">mine</h1>
+    <p style="font-size:var(--mine-text-lg);color:var(--mine-color-text-muted)">
+      Semantic-first, zero-dependency UI library.<br>
+      Include one CSS file and one JS file. Write correct HTML. Get a polished, accessible UI.
+    </p>
+    <div class="hero-badges">
+      <span class="badge primary">Zero dependencies</span>
+      <span class="badge success">Dark mode</span>
+      <span class="badge">&le; 11 KB gzipped</span>
+      <span class="badge">WCAG 2.2 AA</span>
+    </div>
+    <hr style="margin-block:2rem">
+
+    <section class="doc-section" id="install">
+      <h2>Install</h2>
+      <h3>CDN (no build step)</h3>
+      <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mine@0.1.0/dist/mine.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/mine@0.1.0/dist/mine.js"&gt;&lt;/script&gt;</code></pre>
+      <h3>npm</h3>
+      <pre><code>npm install mine</code></pre>
+      <pre><code>import 'mine/dist/mine.css';
+import { toast } from 'mine';</code></pre>
+      <h3>Override tokens</h3>
+      <pre><code>:root {
+  --mine-color-accent:       #7c3aed;
+  --mine-color-accent-hover: #6d28d9;
+  --mine-radius-base:        2px;
+}</code></pre>
+    </section>
+
+    <section class="doc-section" id="dark-mode">
+      <h2>Dark mode</h2>
+      <p>Automatic via <code>prefers-color-scheme</code>. Override with <code>data-theme</code>:</p>
+      <pre><code>&lt;html data-theme="dark"&gt;
+&lt;html data-theme="light"&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="typography">
+      <h2>Typography</h2>
+      <p>No classes needed &mdash; just write semantic HTML.</p>
+      <div class="demo">
+        <h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3>
+        <h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6>
+      </div>
+      <div class="demo">
+        <p>Body text with <strong>bold</strong>, <em>italic</em>, <a href="#">a link</a>.
+        Inline <code>code()</code> and <kbd>Ctrl</kbd>+<kbd>K</kbd>.
+        <mark>Highlighted</mark> and <abbr title="abbreviation">abbr</abbr>. <small>Small text.</small></p>
+      </div>
+      <div class="demo"><blockquote>Good design is as little design as possible. &mdash; Dieter Rams</blockquote></div>
+      <div class="demo"><pre><code>function greet(name) {
+  return `Hello, ${name}!`;
+}</code></pre></div>
+    </section>
+
+    <section class="doc-section" id="lists">
+      <h2>Lists</h2>
+      <div class="demo">
+        <div class="grid" data-cols="2">
+          <div><p><strong>Unordered</strong></p><ul><li>Write semantic HTML</li><li>No classes required</li><li>Automatic dark mode</li></ul></div>
+          <div><p><strong>Ordered</strong></p><ol><li>Install the package</li><li>Include the CSS</li><li>Ship it</li></ol></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="buttons">
+      <h2>Buttons</h2>
+      <div class="demo">
+        <div class="cluster">
+          <button>Default</button>
+          <button class="primary">Primary</button>
+          <button class="danger">Danger</button>
+          <button class="ghost">Ghost</button>
+          <button disabled>Disabled</button>
+        </div>
+      </div>
+      <div class="demo">
+        <div class="cluster" style="align-items:center">
+          <button class="sm">Small</button>
+          <button>Default</button>
+          <button class="lg">Large</button>
+        </div>
+      </div>
+      <div class="demo">
+        <div role="group" aria-label="Text alignment"><button>Left</button><button>Center</button><button>Right</button></div>
+      </div>
+      <pre><code>&lt;button&gt;Default&lt;/button&gt;
+&lt;button class="primary"&gt;Primary&lt;/button&gt;
+&lt;button class="danger"&gt;Danger&lt;/button&gt;
+&lt;button class="ghost"&gt;Ghost&lt;/button&gt;
+&lt;div role="group"&gt;
+  &lt;button&gt;Left&lt;/button&gt;&lt;button&gt;Center&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="forms">
+      <h2>Forms</h2>
+      <div class="demo">
+        <div class="stack">
+          <div class="grid" data-cols="2">
+            <div><label for="demo-name">Full name</label><input type="text" id="demo-name" placeholder="Jane Smith"></div>
+            <div><label for="demo-email">Email</label><input type="email" id="demo-email" placeholder="jane@example.com"></div>
+          </div>
+          <div><label for="demo-invalid">Username (taken)</label><input type="text" id="demo-invalid" aria-invalid="true" value="admin"></div>
+          <div><label for="demo-country">Country</label><select id="demo-country"><option>United States</option><option>United Kingdom</option><option>Canada</option></select></div>
+          <div><label for="demo-bio">Bio</label><textarea id="demo-bio" placeholder="Tell us about yourself&hellip;"></textarea></div>
+          <fieldset>
+            <legend>Preferences</legend>
+            <div class="stack" style="gap:var(--mine-space-2)">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:var(--mine-text-base);font-weight:400;margin:0"><input type="checkbox" checked> Remember me</label>
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:var(--mine-text-base);font-weight:400;margin:0"><input type="checkbox" role="switch" checked> Notifications</label>
+            </div>
+          </fieldset>
+          <div class="cluster">
+            <button class="primary" type="submit">Submit</button>
+            <button type="reset">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="layout">
+      <h2>Layout</h2>
+      <h3>.stack</h3>
+      <div class="demo"><div class="stack" style="max-width:300px"><div class="demo-box">Item A</div><div class="demo-box">Item B</div><div class="demo-box">Item C</div></div></div>
+      <h3>.cluster</h3>
+      <div class="demo"><div class="cluster"><button>Alpha</button><button>Beta</button><button>Gamma</button><button>Delta</button></div></div>
+      <h3>.grid</h3>
+      <div class="demo"><div class="grid" data-cols="3"><div class="demo-box">Col 1</div><div class="demo-box">Col 2</div><div class="demo-box">Col 3</div></div></div>
+      <pre><code>&lt;div class="stack"&gt;&hellip;&lt;/div&gt;
+&lt;div class="cluster"&gt;&hellip;&lt;/div&gt;
+&lt;div class="grid" data-cols="3"&gt;&hellip;&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="cards">
+      <h2>Cards</h2>
+      <div class="demo">
+        <div class="grid" data-cols="2">
+          <article>
+            <header><h3 style="margin:0">Getting started</h3></header>
+            <p>Zero config. Drop in one CSS file and start writing semantic HTML.</p>
+            <footer><button class="primary">Read docs</button><button class="ghost">GitHub</button></footer>
+          </article>
+          <article>
+            <header><div style="display:flex;align-items:center;justify-content:space-between"><h3 style="margin:0">Dark mode</h3><span class="badge success">Auto</span></div></header>
+            <p>Adapts to <code>prefers-color-scheme</code> automatically.</p>
+            <footer><button id="btn-toggle-theme-card">Toggle theme</button></footer>
+          </article>
+        </div>
+      </div>
+      <pre><code>&lt;article&gt;
+  &lt;header&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;/header&gt;
+  &lt;p&gt;Body.&lt;/p&gt;
+  &lt;footer&gt;&lt;button class="primary"&gt;Action&lt;/button&gt;&lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="badges">
+      <h2>Badges</h2>
+      <div class="demo">
+        <div class="cluster">
+          <span class="badge">Default</span>
+          <span class="badge primary">Primary</span>
+          <span class="badge success">Success</span>
+          <span class="badge warning">Warning</span>
+          <span class="badge danger">Danger</span>
+        </div>
+      </div>
+      <pre><code>&lt;span class="badge"&gt;Default&lt;/span&gt;
+&lt;span class="badge success"&gt;Success&lt;/span&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="alerts">
+      <h2>Alerts</h2>
+      <div class="demo">
+        <div class="stack">
+          <div role="alert"><strong>Info</strong> &mdash; Your session expires soon.</div>
+          <div role="alert" class="success"><strong>Success</strong> &mdash; Changes saved.</div>
+          <div role="alert" class="warning"><strong>Warning</strong> &mdash; This cannot be undone.</div>
+          <div role="alert" class="danger"><strong>Error</strong> &mdash; Something went wrong.</div>
+        </div>
+      </div>
+      <pre><code>&lt;div role="alert"&gt;Info.&lt;/div&gt;
+&lt;div role="alert" class="success"&gt;Success.&lt;/div&gt;
+&lt;div role="alert" class="warning"&gt;Warning.&lt;/div&gt;
+&lt;div role="alert" class="danger"&gt;Error.&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="tables">
+      <h2>Tables</h2>
+      <div class="demo">
+        <table>
+          <thead><tr><th scope="col">Name</th><th scope="col">Role</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Alice Chen</strong></td><td>Engineer</td><td><span class="badge success">Active</span></td></tr>
+            <tr><td><strong>Bob Okafor</strong></td><td>Designer</td><td><span class="badge primary">On leave</span></td></tr>
+            <tr><td><strong>Carol Nguyen</strong></td><td>Manager</td><td><span class="badge warning">Review</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc-section" id="accordion">
+      <h2>Accordion</h2>
+      <div class="demo">
+        <details open><summary>What is mine?</summary><p>A semantic-first, zero-dependency UI library.</p></details>
+        <details><summary>How do I customise the accent colour?</summary><p>Override <code>--mine-color-accent</code> on <code>:root</code>.</p></details>
+        <details><summary>Does it support dark mode?</summary><p>Yes &mdash; automatically via <code>prefers-color-scheme</code>.</p></details>
+      </div>
+      <pre><code>&lt;details open&gt;
+  &lt;summary&gt;Question&lt;/summary&gt;
+  &lt;p&gt;Answer.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+    </section>
+
+    <section class="doc-section" id="toast">
+      <h2>Toast</h2>
+      <div class="demo">
+        <div class="cluster">
+          <button id="btn-toast-default">Default</button>
+          <button id="btn-toast-success">Success</button>
+          <button id="btn-toast-error">Error</button>
+          <button id="btn-toast-action">With action</button>
+          <button id="btn-toast-persistent">Persistent</button>
+        </div>
+      </div>
+      <pre><code>mine.toast('Saved.');
+mine.toast('Done!', { type: 'success' });
+mine.toast('Deleted.', {
+  type: 'warning',
+  action: { label: 'Undo', fn: undo },
+});
+const { dismiss } = mine.toast('Uploading&hellip;', { duration: 0 });</code></pre>
+    </section>
+
+    <section class="doc-section" id="tokens">
+      <h2>Design tokens</h2>
+      <table class="token-table">
+        <thead><tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+        <tbody>
+          <tr><td colspan="3" style="padding-top:var(--mine-space-4);font-weight:700">Colour</td></tr>
+          <tr><td><code>--mine-color-bg</code></td><td>#ffffff</td><td>#0f0f0f</td></tr>
+          <tr><td><code>--mine-color-accent</code></td><td>#0066cc</td><td>#60a5fa</td></tr>
+          <tr><td><code>--mine-color-danger</code></td><td>#dc2626</td><td>#f87171</td></tr>
+          <tr><td><code>--mine-color-success</code></td><td>#16a34a</td><td>#4ade80</td></tr>
+          <tr><td><code>--mine-color-warning</code></td><td>#d97706</td><td>#fbbf24</td></tr>
+          <tr><td colspan="3" style="padding-top:var(--mine-space-6);font-weight:700">Spacing</td></tr>
+          <tr><td><code>--mine-space-1..8</code></td><td colspan="2">4px / 8px / 12px / 16px / 24px / 32px</td></tr>
+          <tr><td colspan="3" style="padding-top:var(--mine-space-6);font-weight:700">Shape</td></tr>
+          <tr><td><code>--mine-radius-base</code></td><td colspan="2">6px</td></tr>
+          <tr><td><code>--mine-radius-full</code></td><td colspan="2">9999px</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
+<script src="../dist/mine.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
